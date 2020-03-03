@@ -1,0 +1,7 @@
+function sumAll() {
+
+}
+
+export {
+  sumAll,
+};
