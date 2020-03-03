@@ -1,0 +1,7 @@
+function isTriangle() {
+
+}
+
+export {
+  isTriangle,
+};
