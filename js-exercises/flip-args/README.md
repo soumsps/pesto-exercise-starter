@@ -15,6 +15,8 @@ flipped('a', 'b', 'c', 'd');
 
 ### **What are some good real-life use cases for such a function?**
 *Write your response here*
+1) Last in First Out
+2) Mirror images (phones front camera or flipping photos vertically / horizontally in photo editing software)
 
 ### **What test cases can you add to the test file?**
 
