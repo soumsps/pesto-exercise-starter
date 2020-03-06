@@ -1,12 +1,16 @@
 function chunkArrayInGroups(array, chunkSize) {
-  return array.reduce((acc, _, currentIndex) => {
-    const chunkBreakpoint = currentIndex % chunkSize === 0;
-    if (chunkBreakpoint) {
-      const arrayChunk = array.slice(currentIndex, currentIndex + chunkSize);
-      return acc.concat([arrayChunk]);
+  const chunkedArray = [];
+  let chunkStartIndex = 0;
+
+  while (true) {
+    if (chunkStartIndex >= array.length) {
+      break;
     }
-    return acc;
-  }, []);
+    const newChunk = array.slice(chunkStartIndex, chunkStartIndex + chunkSize);
+    chunkStartIndex += chunkSize;
+    chunkedArray.push(newChunk);
+  }
+  return chunkedArray;
 }
 
 export {
