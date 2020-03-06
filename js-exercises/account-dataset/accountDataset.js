@@ -1,3 +1,4 @@
+// Solution not completed ... WIP
 const path = require("path");
 const fs = require("fs");
 
@@ -8,15 +9,23 @@ const fileContent = fs.readFileSync(
 
 const { bankBalances } = JSON.parse(fileContent);
 
-function hundredThousandairs() {}
+function hundredThousandairs() {
+  const minimumAmountTobePresent = 100000;
+  return bankBalances.filter((account) => account.amount > minimumAmountTobePresent);
+}
 
-function datasetWithRoundedDollar() {}
+function datasetWithRoundedDollar() {
 
-function sumOfBankBalances() {}
+}
 
-function sumOfInterests() {}
+function sumOfBankBalances() {
+  const sumOfAccountsBalance = bankBalances.reduce((accumulator, account) => (accumulator + parseFloat(account.amount)), 0);
+  return Math.round(sumOfAccountsBalance * 100) / 100;
+}
 
-function higherStateSums() {}
+function sumOfInterests() { }
+
+function higherStateSums() { }
 
 export {
   hundredThousandairs,
