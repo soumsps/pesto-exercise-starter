@@ -4,8 +4,8 @@ describe("addBigIntegers", () => {
   it("Adds a series of large integers", () => {
     expect(
       addBigIntegers(`539
-8
-201`)
+    8
+    201`)
     ).toEqual("748");
     expect(
       addBigIntegers(`8284089949645109317773
