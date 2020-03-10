@@ -1,4 +1,3 @@
-// Primitive Types
 function isString(data) {
   return typeof data === 'string' || data instanceof String;
 }
@@ -16,23 +15,28 @@ function isUndefined(data) {
 }
 
 function isBoolean(data) {
-  return typeof data === 'boolean' || data instanceof Boolean;
+  return typeof data === 'boolean';
 }
 
 function isSymbol(data) {
   return typeof data === 'symbol';
 }
 
-// Composite Types
+function isPrimitive(data) {
+  return isString(data) || isNumber(data) || isSymbol(data) || isNull(data) || isUndefined(data) || isBoolean(data);
+}
+
+
 const { isArray } = Array;
 
 function isObject(data) {
-  return typeof data === 'object' || data instanceof Object;
+  return typeof data === 'object' || data.constructor === Object;
 }
 
 const typeCheck = (data) => {
   let type = '';
-  if (isString(data) || isNumber(data) || isSymbol(data) || isNull(data) || isUndefined(data) || isBoolean(data)) {
+
+  if (isPrimitive(data)) {
     type = 'primitive';
   } else if (isArray(data)) {
     type = 'array';
