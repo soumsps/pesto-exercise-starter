@@ -33,31 +33,16 @@ function isObject(data) {
   return typeof data === 'object' || data.constructor === Object;
 }
 
-const typeCheck = (data) => {
-  let type = '';
-
-  if (isPrimitive(data)) {
-    type = 'primitive';
-  } else if (isArray(data)) {
-    type = 'array';
-  } else if (isObject(data)) {
-    type = 'object';
-  }
-
-  return type;
-};
-
 
 const deepCopyObject = objToCopy => {
   let copiedObject = 'Error!';
-  const type = typeCheck(objToCopy);
 
-  if (type === 'primitive') {
+  if (isPrimitive(objToCopy)) {
     copiedObject = objToCopy;
-  } else if (type === 'array') {
+  } else if (isArray(objToCopy)) {
     copiedObject = [];
     objToCopy.map((item) => copiedObject.push(deepCopyObject(item)));
-  } else if (type === 'object') {
+  } else if (isObject(objToCopy)) {
     copiedObject = {};
     for (const property of Object.keys(objToCopy)) {
       copiedObject[property] = deepCopyObject(objToCopy[property]);
