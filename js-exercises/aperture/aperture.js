@@ -1,0 +1,3 @@
+function aperture() {}
+
+export { aperture };
