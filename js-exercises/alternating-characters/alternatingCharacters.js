@@ -1,11 +1,11 @@
 function getMinimumDeletion(string) {
-  let previousChar = "";
+  let previousCharacter = '';
   let deletionCount = 0;
-  string.split("").map(char => {
-    if (char === previousChar) {
+  string.split('').map(character => {
+    if (character === previousCharacter) {
       deletionCount += 1;
     }
-    previousChar = char;
+    previousCharacter = character;
   });
 
   return deletionCount;
