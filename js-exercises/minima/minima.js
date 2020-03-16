@@ -1,0 +1,3 @@
+function minima() {}
+
+export { minima };
