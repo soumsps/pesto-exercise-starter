@@ -28,6 +28,6 @@ describe('bizarreStringIncrementer', () => {
   });
 
   it('should always pad the only the leading zeroes', () => {
-    expect('f99oo0099').toBe('f99oo0100');
+    expect(bizarreStringIncrementer('f99oo0099')).toBe('f99oo0100');
   });
 });
