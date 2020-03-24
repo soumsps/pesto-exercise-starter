@@ -20,6 +20,8 @@ const normalizeWords = words => {
 };
 
 const countingAnagrams = str => {
+  if (typeof str !== 'string') throw new Error();
+
   const wordArray = str.split(' ');
   const normalizedWordsArray = normalizeWords(wordArray);
   const wordsFrequencyArray = frequencyMapOf(normalizedWordsArray);
