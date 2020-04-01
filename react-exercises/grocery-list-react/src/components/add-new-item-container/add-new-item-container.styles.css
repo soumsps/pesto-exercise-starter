@@ -1,0 +1,10 @@
+.add-new-item-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 300;
+  margin-left: 5px;
+}
