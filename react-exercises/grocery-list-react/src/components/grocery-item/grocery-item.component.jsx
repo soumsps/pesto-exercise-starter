@@ -31,6 +31,8 @@ const GroceryItem = ({
         btnClass={'btn-secondary btn-circle increase-decrease-btn'}
         onClickCallback={handleIncrementItemBtnClick}
         itemID={id}
+        btnClassDisabled={purchased ? 'btn-disabled' : ''}
+        isDisabled={purchased}
       >
         +
       </CustomButton>
@@ -38,6 +40,8 @@ const GroceryItem = ({
         btnClass={'btn-secondary btn-circle increase-decrease-btn'}
         onClickCallback={handleDecrementItemBtnClick}
         itemID={id}
+        btnClassDisabled={purchased ? 'btn-disabled' : ''}
+        isDisabled={purchased}
       >
         -
       </CustomButton>

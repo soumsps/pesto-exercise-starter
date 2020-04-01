@@ -92,14 +92,23 @@ class HomePage extends Component {
 
   decreaseQuantity(event) {
     const itemID = event.target.getAttribute('data-item-id');
-    const currentItems = this.state.groceryItems;
+    let currentItems = this.state.groceryItems;
     currentItems.forEach(item => {
-      if (item.id === itemID && item.quantity > 1 && !item.purchased) {
+      if (item.id === itemID && !item.purchased) {
         item.quantity -= 1;
+
+        if (item.quantity === 0) {
+          currentItems = this.removeItem(currentItems, itemID);
+        }
       }
     });
 
     this.setState({ groceryItems: currentItems });
+  }
+
+  removeItem(currentItems, itemID) {
+    console.log('removed');
+    return currentItems.filter(item => item.id !== itemID);
   }
 
   onChangeItemInputField(inputText) {
