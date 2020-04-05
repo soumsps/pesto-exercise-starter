@@ -4,7 +4,7 @@
 
 Game URL: **\_**
 
-Mockup URL: **\_**
+Mockup URL: https://balsamiq.cloud/s96nxj2/penhgg
 
 ## How to do the question
 

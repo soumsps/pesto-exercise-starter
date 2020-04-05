@@ -1,0 +1,19 @@
+.wrapper {
+  max-width: 550px;
+  margin: auto;
+  /* background-color: aquamarine; */
+}
+
+.header {
+  text-align: center;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.score-text {
+  margin-top: 40px;
+  text-align: center;
+}
