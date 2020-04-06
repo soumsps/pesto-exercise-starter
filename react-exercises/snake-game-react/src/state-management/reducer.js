@@ -3,15 +3,26 @@ export const reducer = (state, action) => {
   const payload = action.payload;
 
   switch (type) {
-    case 'generateBorderData':
+    case 'start-game':
       return {
         ...state,
-        borderData: payload,
+        status: 'playing',
       };
-    case 'initializeGame':
+    case 'restart-game':
       return {
         ...state,
-        boardMatrix: payload,
+        status: 'playing',
+      };
+    case 'move-snake':
+      return {
+        ...state,
+        snakeData: payload.snakeData,
+        boardMatrix: payload.boardMatrix,
+      };
+    case 'set-snake-direction':
+      return {
+        ...state,
+        snakeDirection: payload,
       };
 
     default:

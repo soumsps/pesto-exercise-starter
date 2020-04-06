@@ -1,36 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import GameBoard from '../../components/game-board/game-board.component';
+import GameController from '../../components/game-controller/game-controller.component';
 import { getState } from '../../state-management/store';
-import { generateBorder, generateCellData } from '../../game-mechanics/game-board.utility';
+
 import './homepage.styles.css';
 
 const HomePage = () => {
-  const { state, dispatch } = getState();
+  const { state } = getState();
   console.log(state);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'generateBorderData',
-  //     payload: generateBorder(state.boardSize),
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'initializeGame',
-  //     payload: generateCellData(state.boardSize, state.borderData),
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [state.borderData, state.boardSize]);
 
   return (
     <div className=" wrapper">
       <header className="header">
         <h1 className="page-title">Snake Game</h1>
       </header>
-      <div className="score-text">Score: {state.score}</div>
+      <div className="scoreboard">
+        <div className="score-text">Score: {state.score}</div>
+        <div className="score-text">High Score: {state.highScore}</div>
+      </div>
+
       <GameBoard boardMatrix={state.boardMatrix} />
+      <GameController />
+      <div className="instruction-text">Tip: Use arrow buttons to control snake.</div>
     </div>
   );
 };

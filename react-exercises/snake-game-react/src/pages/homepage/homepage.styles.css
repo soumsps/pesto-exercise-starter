@@ -1,5 +1,5 @@
 .wrapper {
-  max-width: 550px;
+  width: fit-content;
   margin: auto;
   /* background-color: aquamarine; */
 }
@@ -14,6 +14,18 @@
 }
 
 .score-text {
-  margin-top: 40px;
+  margin: 30px 15px 0px 15px;
   text-align: center;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.instruction-text {
+  color: #f44336;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 50px;
 }

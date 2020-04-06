@@ -41,13 +41,84 @@ const generateBorder = (boardSize) => {
   return borderData;
 };
 
-const markBorder = (borderData, [...cellData]) => {
+const markBorder = (borderData, [...boardMatrix]) => {
   //eslint-disable-next-line array-callback-return
   borderData.map(([i, j, classCSS]) => {
-    cellData[i][j].class += ` ${classCSS}`;
+    boardMatrix[i][j].class += ` ${classCSS}`;
   });
 
-  return cellData;
+  return boardMatrix;
 };
 
-export { generateBorder, generateCellData, markBorder };
+const setFoodPosition = (snakeFood, [...boardMatrix]) => {
+  //eslint-disable-next-line array-callback-return
+  snakeFood.map(([i, j]) => {
+    boardMatrix[i][j].type = `snake-food`;
+  });
+
+  return boardMatrix;
+};
+
+const setSnakePosition = (snakeData, [...boardMatrix]) => {
+  let [i, j] = snakeData.head;
+  boardMatrix[i][j].type = `snake-head`;
+
+  // eslint-disable-next-line array-callback-return
+  snakeData.body.map(([i, j]) => {
+    boardMatrix[i][j].type = `snake-body`;
+  });
+
+  return boardMatrix;
+};
+
+const cleanOldSnakePosition = (snakeData, [...boardMatrix]) => {
+  let [i, j] = snakeData.head;
+  boardMatrix[i][j].type = `cell`;
+
+  // eslint-disable-next-line array-callback-return
+  snakeData.body.map(([i, j]) => {
+    boardMatrix[i][j].type = `cell`;
+  });
+
+  return boardMatrix;
+};
+
+const newSnakePositionData = (oldSnakeData, snakeDirection) => {
+  oldSnakeData.body.unshift([...oldSnakeData.head]);
+  oldSnakeData.body.pop();
+
+  if (snakeDirection === 'left') {
+    oldSnakeData.head[1] -= 1;
+  }
+  if (snakeDirection === 'right') {
+    oldSnakeData.head[1] += 1;
+  }
+  if (snakeDirection === 'up') {
+    oldSnakeData.head[0] -= 1;
+  }
+  if (snakeDirection === 'down') {
+    oldSnakeData.head[0] += 1;
+  }
+
+  return { ...oldSnakeData };
+};
+
+const updateSnakePosition = ({ ...state }) => {
+  state.boardMatrix = cleanOldSnakePosition(state.snakeData, state.boardMatrix);
+  const newSnakeData = newSnakePositionData(state.snakeData, state.snakeDirection);
+  const newBoardMatrix = setSnakePosition(newSnakeData, state.boardMatrix);
+
+  return { snakeData: newSnakeData, boardMatrix: newBoardMatrix };
+};
+
+const updateFoodPosition = (snakeData, [...cellData]) => {};
+
+export {
+  generateBorder,
+  generateCellData,
+  markBorder,
+  updateFoodPosition,
+  updateSnakePosition,
+  setFoodPosition,
+  setSnakePosition,
+};
