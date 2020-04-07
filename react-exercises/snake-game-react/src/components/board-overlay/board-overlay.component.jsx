@@ -1,10 +1,14 @@
-import React from 'react';
+import { cloneDeep } from 'lodash';
+import React, { useState } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import { getState } from '../../state-management/store';
+
 import './board-overlay.styles.css';
 
 const BoardOverlay = () => {
   const { state, dispatch } = getState();
+  const [initialState] = useState(cloneDeep(state));
+
   const onClickGameStartButton = () => {
     console.log('start btn clicked');
     dispatch({
@@ -16,6 +20,7 @@ const BoardOverlay = () => {
     console.log('restart btn clicked');
     dispatch({
       type: 'restart-game',
+      payload: initialState,
     });
   };
 

@@ -2,26 +2,58 @@ import React, { useEffect } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import { useInterval } from '../custom-hooks/useInterval.hook';
 import { getState } from '../../state-management/store';
-import { updateSnakePosition } from '../../game-mechanics/game-board.utility';
+import {
+  updateSnakePosition,
+  isSnakeDead,
+  growSnake,
+  isFoodEaten,
+  generateSnakeFood,
+} from '../../game-mechanics/game-board.utility';
 import './game-controller.styles.css';
 
 const GameController = () => {
   const { state, dispatch } = getState();
   const KeyCodes = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 };
-  const delay = 200;
+  const delay = 300;
 
   useEffect(() => {
-    window.onkeydown = handleKeyDown;
+    document.onkeydown = handleKeyDown;
   });
 
   useInterval(
     () => {
-      console.log('hello');
-      // console.log(updateSnakePosition(state));
-      dispatch({
-        type: 'move-snake',
-        payload: updateSnakePosition(state),
-      });
+      if (isFoodEaten(state)) {
+        dispatch({
+          type: 'grow-snake',
+          payload: growSnake(state.snakeData, state.snakeDirection),
+        });
+
+        dispatch({
+          type: 'add-new-food',
+          payload: generateSnakeFood(state),
+        });
+
+        dispatch({
+          type: 'set-score',
+        });
+
+        dispatch({
+          type: 'set-highscore',
+        });
+
+        return;
+      }
+
+      if (isSnakeDead(state)) {
+        dispatch({
+          type: 'game-over',
+        });
+      } else {
+        dispatch({
+          type: 'move-snake',
+          payload: updateSnakePosition(state),
+        });
+      }
     },
     state.status === 'playing' ? delay - state.snakeSpeed : null
   );
