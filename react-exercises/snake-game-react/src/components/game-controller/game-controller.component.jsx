@@ -14,7 +14,7 @@ import './game-controller.styles.css';
 const GameController = () => {
   const { state, dispatch } = getState();
   const KeyCodes = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 };
-  const delay = 300;
+  const delay = 200;
 
   useEffect(() => {
     document.onkeydown = handleKeyDown;
@@ -39,6 +39,11 @@ const GameController = () => {
 
         dispatch({
           type: 'set-highscore',
+        });
+
+        dispatch({
+          type: 'increase-snake-speed',
+          payload: { step: 5 },
         });
 
         return;
@@ -118,16 +123,16 @@ const GameController = () => {
   return (
     <div className="mobile-controls">
       <CustomButton btnClass={'btn-game-control'} onClickCallback={onLeftButtonPress}>
-        &#x2B05;
+        <i className="fas fa-arrow-left"></i>
       </CustomButton>
       <CustomButton btnClass={'btn-game-control'} onClickCallback={onUpButtonPress}>
-        &#x2B06;
+        <i className="fas fa-arrow-up"></i>
       </CustomButton>
       <CustomButton btnClass={'btn-game-control'} onClickCallback={onDownButtonPress}>
-        &#x2B07;
+        <i className="fas fa-arrow-down"></i>
       </CustomButton>
       <CustomButton btnClass={'btn-game-control'} onClickCallback={onRightButtonPress}>
-        &#x27A1;
+        <i className="fas fa-arrow-right"></i>
       </CustomButton>
     </div>
   );

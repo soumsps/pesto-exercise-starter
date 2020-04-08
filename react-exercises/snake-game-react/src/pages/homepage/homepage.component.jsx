@@ -16,6 +16,7 @@ const HomePage = () => {
       </header>
       <div className="scoreboard">
         <div className="score-text">Score: {state.score}</div>
+        <div className="score-text">Food Eaten: {state.foodEaten}</div>
         <div className="score-text">High Score: {state.highScore}</div>
       </div>
 

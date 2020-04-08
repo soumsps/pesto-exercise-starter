@@ -12,6 +12,7 @@ const initialState = {
   status: 'not-started',
   highScore: 0,
   score: 0,
+  foodEaten: 0,
   boardSize: [25, 35],
   borderData: [],
   boardMatrix: [],
@@ -25,7 +26,7 @@ const initialState = {
   },
   snakeDirection: 'down',
   snakeFood: [10, 7],
-  snakeSpeed: 100,
+  snakeSpeed: 1,
 };
 
 const initializeGame = () => {
@@ -35,7 +36,5 @@ const initializeGame = () => {
   initialState.boardMatrix = setFoodPosition(initialState.snakeFood, initialState.boardMatrix);
   initialState.boardMatrix = setSnakePosition(initialState.snakeData, initialState.boardMatrix);
 };
-
-initializeGame();
 
 export { initialState, initializeGame };

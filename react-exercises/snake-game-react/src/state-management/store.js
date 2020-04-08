@@ -1,6 +1,12 @@
 import React, { useContext, createContext, useReducer } from 'react';
-import { initialState } from './initialState';
+import { initialState, initializeGame } from './initialState';
 import { reducer } from './reducer';
+
+initializeGame();
+const height = window.innerHeight;
+const width = window.innerWidth;
+console.log('innerheight', height);
+console.log('innerWidth', width);
 
 const StateContext = createContext(initialState);
 

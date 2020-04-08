@@ -12,10 +12,10 @@ export const reducer = (state, action) => {
       };
     case 'restart-game':
       let obj = cloneDeep(payload);
-      // console.log(obj);
       return {
         ...obj,
         status: 'playing',
+        highScore: state.highScore,
       };
 
     case 'move-snake':
@@ -28,6 +28,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         snakeData: payload,
+      };
+
+    case 'increase-snake-speed':
+      return {
+        ...state,
+        snakeSpeed: state.snakeSpeed < 80 ? state.snakeSpeed + payload.step : state.snakeSpeed,
       };
     case 'add-new-food':
       return {
@@ -50,7 +56,8 @@ export const reducer = (state, action) => {
     case 'set-score':
       return {
         ...state,
-        score: state.score + 1,
+        score: state.score + state.snakeSpeed,
+        foodEaten: state.foodEaten + 1,
       };
 
     case 'set-highscore':

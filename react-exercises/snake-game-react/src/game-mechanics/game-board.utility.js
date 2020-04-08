@@ -76,14 +76,16 @@ const generateSnakeFood = (state) => {
 
   while (!isFoodValid) {
     let food = randomFood(boardSize[0], boardSize[1]);
+    let matchFound = 0;
     console.log('food: ', food);
     for (let i = 0; i < obstacles.length; i++) {
       if (food[0] === obstacles[i][0] && food[1] === obstacles[i][1]) {
-        continue;
+        matchFound += 1;
       }
     }
-    isFoodValid = true;
-    if (isFoodValid) {
+
+    if (matchFound === 0) {
+      isFoodValid = true;
       return { snakeFood: food, boardMatrix: setFoodPosition(food, state.boardMatrix) };
     }
   }
