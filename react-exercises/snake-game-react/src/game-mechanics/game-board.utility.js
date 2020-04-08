@@ -67,7 +67,6 @@ const generateSnakeFood = (state) => {
     state.snakeData.head,
     state.snakeFood,
   ];
-  console.log('obstacle: ', obstacles);
   const randomFood = (row, col) => {
     const i = Math.floor(Math.random() * row);
     const j = Math.floor(Math.random() * col);
@@ -77,7 +76,6 @@ const generateSnakeFood = (state) => {
   while (!isFoodValid) {
     let food = randomFood(boardSize[0], boardSize[1]);
     let matchFound = 0;
-    console.log('food: ', food);
     for (let i = 0; i < obstacles.length; i++) {
       if (food[0] === obstacles[i][0] && food[1] === obstacles[i][1]) {
         matchFound += 1;

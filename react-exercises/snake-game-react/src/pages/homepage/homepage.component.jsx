@@ -7,7 +7,6 @@ import './homepage.styles.css';
 
 const HomePage = () => {
   const { state } = getState();
-  console.log(state);
 
   return (
     <div className=" wrapper">

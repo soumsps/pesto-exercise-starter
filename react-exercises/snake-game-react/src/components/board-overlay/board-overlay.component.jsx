@@ -10,14 +10,12 @@ const BoardOverlay = () => {
   const [initialState] = useState(cloneDeep(state));
 
   const onClickGameStartButton = () => {
-    console.log('start btn clicked');
     dispatch({
       type: 'start-game',
     });
   };
 
   const onClickGameRestartButton = () => {
-    console.log('restart btn clicked');
     dispatch({
       type: 'restart-game',
       payload: initialState,

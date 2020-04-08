@@ -2,11 +2,13 @@ import React, { useContext, createContext, useReducer } from 'react';
 import { initialState, initializeGame } from './initialState';
 import { reducer } from './reducer';
 
-initializeGame();
-const height = window.innerHeight;
 const width = window.innerWidth;
-console.log('innerheight', height);
-console.log('innerWidth', width);
+if (width < 500) {
+  initialState.boardSize = [20, 23];
+  initialState.delay = 300;
+}
+
+initializeGame();
 
 const StateContext = createContext(initialState);
 

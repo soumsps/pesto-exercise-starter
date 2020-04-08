@@ -14,7 +14,6 @@ import './game-controller.styles.css';
 const GameController = () => {
   const { state, dispatch } = getState();
   const KeyCodes = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 };
-  const delay = 200;
 
   useEffect(() => {
     document.onkeydown = handleKeyDown;
@@ -60,7 +59,7 @@ const GameController = () => {
         });
       }
     },
-    state.status === 'playing' ? delay - state.snakeSpeed : null
+    state.status === 'playing' ? state.delay - state.snakeSpeed : null
   );
 
   const onLeftButtonPress = () => {

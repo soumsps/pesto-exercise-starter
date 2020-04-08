@@ -13,7 +13,7 @@ const initialState = {
   highScore: 0,
   score: 0,
   foodEaten: 0,
-  boardSize: [25, 35],
+  boardSize: [30, 40],
   borderData: [],
   boardMatrix: [],
   snakeData: {
@@ -25,7 +25,8 @@ const initialState = {
     ],
   },
   snakeDirection: 'down',
-  snakeFood: [10, 7],
+  snakeFood: [10, 3],
+  delay: 200,
   snakeSpeed: 1,
 };
 
