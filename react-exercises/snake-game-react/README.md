@@ -2,7 +2,7 @@
 
 # Submission
 
-Game URL: https://snake-game-soumsps.netlify.com/
+Game URL: https://snake-gamev2-soumsps.netlify.com/
 
 Mockup URL: https://balsamiq.cloud/s96nxj2/penhgg
 
