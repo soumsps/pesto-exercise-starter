@@ -58,15 +58,9 @@ const setFoodPosition = (snakeFood, [...boardMatrix]) => {
   return boardMatrix;
 };
 
-const generateSnakeFood = (state) => {
+const generateSnakeFood = (boardSize, borderData, snakeData, snakeFood, boardMatrix) => {
   let isFoodValid = false;
-  const boardSize = state.boardSize;
-  const obstacles = [
-    ...state.borderData,
-    ...state.snakeData.body,
-    state.snakeData.head,
-    state.snakeFood,
-  ];
+  const obstacles = [...borderData, ...snakeData.body, snakeData.head, snakeFood];
   const randomFood = (row, col) => {
     const i = Math.floor(Math.random() * row);
     const j = Math.floor(Math.random() * col);
@@ -84,7 +78,7 @@ const generateSnakeFood = (state) => {
 
     if (matchFound === 0) {
       isFoodValid = true;
-      return { snakeFood: food, boardMatrix: setFoodPosition(food, state.boardMatrix) };
+      return { snakeFood: food, boardMatrix: setFoodPosition(food, boardMatrix) };
     }
   }
 };
@@ -147,17 +141,17 @@ const newSnakePositionData = (oldSnakeData, snakeDirection) => {
   return newSnakeData;
 };
 
-const updateSnakePosition = (state) => {
-  state.boardMatrix = cleanOldSnakePosition(state.snakeData, state.boardMatrix);
-  const newSnakeData = newSnakePositionData(state.snakeData, state.snakeDirection);
-  const newBoardMatrix = setSnakePosition(newSnakeData, state.boardMatrix);
+const updateSnakePosition = (snakeData, boardMatrix, snakeDirection) => {
+  boardMatrix = cleanOldSnakePosition(snakeData, boardMatrix);
+  const newSnakeData = newSnakePositionData(snakeData, snakeDirection);
+  const newBoardMatrix = setSnakePosition(newSnakeData, boardMatrix);
 
   return { snakeData: newSnakeData, boardMatrix: newBoardMatrix };
 };
 
-const isSnakeDead = (state) => {
-  const snakeHead = state.snakeData.head;
-  const obstacles = [...state.borderData, ...state.snakeData.body];
+const isSnakeDead = (snakeData, borderData) => {
+  const snakeHead = snakeData.head;
+  const obstacles = [...borderData, ...snakeData.body];
 
   for (let i = 0; i < obstacles.length; i++) {
     if (snakeHead[0] === obstacles[i][0] && snakeHead[1] === obstacles[i][1]) {
@@ -188,11 +182,8 @@ const growSnake = (oldSnakeData, snakeDirection) => {
   return newSnakeData;
 };
 
-const isFoodEaten = (state) => {
-  if (
-    state.snakeData.head[0] === state.snakeFood[0] &&
-    state.snakeData.head[1] === state.snakeFood[1]
-  ) {
+const isFoodEaten = (snakeData, snakeFood) => {
+  if (snakeData.head[0] === snakeFood[0] && snakeData.head[1] === snakeFood[1]) {
     return true;
   }
   return false;

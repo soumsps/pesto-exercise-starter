@@ -12,7 +12,32 @@ import {
 import './game-controller.styles.css';
 
 const GameController = () => {
-  const { state, dispatch } = getState();
+  const {
+    status,
+    setStatus,
+    highScore,
+    setHighScore,
+    score,
+    setScore,
+    foodEaten,
+    setFoodEaten,
+    boardSize,
+    setBoardSize,
+    borderData,
+    setBorderData,
+    boardMatrix,
+    setBoardMatrix,
+    snakeData,
+    setSnakeData,
+    snakeDirection,
+    setSnakeDirection,
+    snakeFood,
+    setSnakeFood,
+    delay,
+    setDelay,
+    snakeSpeed,
+    setSnakeSpeed,
+  } = getState();
   const KeyCodes = { LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 };
 
   useEffect(() => {
@@ -21,84 +46,55 @@ const GameController = () => {
 
   useInterval(
     () => {
-      if (isFoodEaten(state)) {
-        dispatch({
-          type: 'grow-snake',
-          payload: growSnake(state.snakeData, state.snakeDirection),
-        });
-
-        dispatch({
-          type: 'add-new-food',
-          payload: generateSnakeFood(state),
-        });
-
-        dispatch({
-          type: 'set-score',
-        });
-
-        dispatch({
-          type: 'set-highscore',
-        });
-
-        dispatch({
-          type: 'increase-snake-speed',
-          payload: { step: 5 },
-        });
+      if (isFoodEaten(snakeData, snakeFood)) {
+        const obj = generateSnakeFood(boardSize, borderData, snakeData, snakeFood, boardMatrix);
+        setSnakeData(growSnake(snakeData, snakeDirection));
+        setSnakeFood(obj.snakeFood);
+        setBoardMatrix(obj.boardMatrix);
+        setScore(score + snakeSpeed);
+        setFoodEaten(foodEaten + 1);
+        setHighScore(score > highScore ? score : highScore);
+        setSnakeSpeed(snakeSpeed < 80 ? snakeSpeed + 5 : snakeSpeed);
 
         return;
       }
 
-      if (isSnakeDead(state)) {
-        dispatch({
-          type: 'game-over',
-        });
+      if (isSnakeDead(snakeData, borderData)) {
+        setStatus('game-over');
       } else {
-        dispatch({
-          type: 'move-snake',
-          payload: updateSnakePosition(state),
-        });
+        const obj2 = updateSnakePosition(snakeData, boardMatrix, snakeDirection);
+        setSnakeData(obj2.snakeData);
+        setBoardMatrix(obj2.boardMatrix);
       }
     },
-    state.status === 'playing' ? state.delay - state.snakeSpeed : null
+    status === 'playing' ? delay - snakeSpeed : null
   );
 
   const onLeftButtonPress = () => {
-    if (state.snakeDirection === 'right') {
+    if (snakeDirection === 'right') {
       return;
     }
-    dispatch({
-      type: 'set-snake-direction',
-      payload: 'left',
-    });
+    setSnakeDirection('left');
   };
   const onUpButtonPress = () => {
-    if (state.snakeDirection === 'down') {
+    if (snakeDirection === 'down') {
       return;
     }
-    dispatch({
-      type: 'set-snake-direction',
-      payload: 'up',
-    });
+    setSnakeDirection('up');
   };
 
   const onDownButtonPress = () => {
-    if (state.snakeDirection === 'up') {
+    if (snakeDirection === 'up') {
       return;
     }
-    dispatch({
-      type: 'set-snake-direction',
-      payload: 'down',
-    });
+    setSnakeDirection('down');
   };
 
   const onRightButtonPress = () => {
-    if (state.snakeDirection === 'left') {
+    if (snakeDirection === 'left') {
       return;
     }
-    dispatch({
-      type: 'set-snake-direction',
-      payload: 'right',
-    });
+    setSnakeDirection('right');
   };
 
   const handleKeyDown = (event) => {

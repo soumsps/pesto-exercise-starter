@@ -6,7 +6,8 @@ import { getState } from '../../state-management/store';
 import './homepage.styles.css';
 
 const HomePage = () => {
-  const { state } = getState();
+  const { score, foodEaten, highScore, boardMatrix } = getState();
+  console.log(getState());
 
   return (
     <div className=" wrapper">
@@ -14,12 +15,12 @@ const HomePage = () => {
         <h1 className="page-title">Snake Game</h1>
       </header>
       <div className="scoreboard">
-        <div className="score-text">Score: {state.score}</div>
-        <div className="score-text">Food Eaten: {state.foodEaten}</div>
-        <div className="score-text">High Score: {state.highScore}</div>
+        <div className="score-text">Score: {score}</div>
+        <div className="score-text">Food Eaten: {foodEaten}</div>
+        <div className="score-text">High Score: {highScore}</div>
       </div>
 
-      <GameBoard boardMatrix={state.boardMatrix} />
+      <GameBoard boardMatrix={boardMatrix} />
       <GameController />
       <div className="instruction-text">Tip: Use arrow buttons to control snake.</div>
     </div>

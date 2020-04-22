@@ -6,27 +6,22 @@ import { getState } from '../../state-management/store';
 import './board-overlay.styles.css';
 
 const BoardOverlay = () => {
-  const { state, dispatch } = getState();
-  const [initialState] = useState(cloneDeep(state));
+  const { status, setStatus } = getState();
+  //const [initialState] = useState(cloneDeep(state));
 
   const onClickGameStartButton = () => {
-    dispatch({
-      type: 'start-game',
-    });
+    setStatus('playing');
   };
 
   const onClickGameRestartButton = () => {
-    dispatch({
-      type: 'restart-game',
-      payload: initialState,
-    });
+    setStatus('playing');
   };
 
   return (
     <>
-      {state.status !== 'playing' ? (
+      {status !== 'playing' ? (
         <div className="board-overlay">
-          {state.status === 'not-started' ? (
+          {status === 'not-started' ? (
             <div className="start-overlay-content">
               <div className="start-oc-text">Start Game</div>
               <CustomButton
@@ -40,7 +35,7 @@ const BoardOverlay = () => {
             ''
           )}
 
-          {state.status === 'game-over' ? (
+          {status === 'game-over' ? (
             <div className="restart-overlay-content">
               <div className="restart-oc-text">Game Over!</div>
 
