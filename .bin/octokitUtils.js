@@ -54,8 +54,8 @@ async function fetchFilesOf({
     allFilesToDownload.map(
       async ({ name, download_url: downloadURL, path }) => {
         const fileResponse = await fetch(downloadURL);
-        const file = await fileResponse.text();
-        return { name, path, file };
+        const fileArrayBuffer = await fileResponse.arrayBuffer();
+        return { name, path, fileArrayBuffer };
       }
     )
   );
