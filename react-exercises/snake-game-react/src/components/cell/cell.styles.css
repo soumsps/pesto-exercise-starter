@@ -1,0 +1,6 @@
+.cell {
+  border-radius: 2px;
+  width: 14px;
+  box-shadow: inset 0px 0px 4px 0px #ececec;
+  height: 14px;
+}

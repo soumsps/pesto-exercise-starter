@@ -1,0 +1,31 @@
+.wrapper {
+  width: fit-content;
+  margin: auto;
+  /* background-color: aquamarine; */
+}
+
+.header {
+  text-align: center;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.score-text {
+  margin: 30px 15px 0px 15px;
+  text-align: center;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.instruction-text {
+  color: #f44336;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+}
