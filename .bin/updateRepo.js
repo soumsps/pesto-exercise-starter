@@ -69,7 +69,7 @@ async function updateRepo() {
   const gitStatusOutput = await cmdGet('git status --porcelain');
   const touchedFiles = gitStatusOutput.split('\n').filter(el => el !== '');
   if (touchedFiles.length > 0) {
-    error('These files need to be commited/stashed before the update.');
+    error('These files need to be committed/stashed before the update.');
     for (const file of touchedFiles) {
       const fileData = file.split(' ');
       info(fileData[fileData.length - 1]);
@@ -89,6 +89,9 @@ async function updateRepo() {
         const mergeToMaster = `git merge ${upstreamRemoteName}/master`;
         info(`Merging upstream to master: ${mergeToMaster}`);
         await cmdGet(mergeToMaster);
+
+        info('Pushing master to origin');
+        await cmdGet('git push origin master');
 
         if (currentBranch !== 'master') {
           const checkoutPreviousBranch = `git checkout ${currentBranch}`;

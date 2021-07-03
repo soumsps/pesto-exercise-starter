@@ -1,0 +1,32 @@
+.item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.item-name {
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.quantity-badge {
+  padding: 2px 8px;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  margin: 0px 10px;
+}
+
+.badge-success {
+  color: black;
+  background-color: #cddc39;
+}
+
+.badge-danger {
+  color: white;
+  background-color: #e95b50;
+}
